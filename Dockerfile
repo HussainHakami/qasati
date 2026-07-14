@@ -18,7 +18,7 @@ COPY vite.config.ts ./
 COPY ecosystem.config.js ./
 COPY server/ ./server/
 
-# Install with pnpm (fast), then rebuild better-sqlite3 with npm
+# Install with pnpm, rebuild better-sqlite3
 RUN pnpm install && npm rebuild better-sqlite3
 
 # Copy source code
@@ -42,7 +42,8 @@ FROM node:18-slim AS production
 
 WORKDIR /app
 
-# Install PM2 + pnpm
+# Install build tools + PM2 + pnpm
+RUN apt-get update && apt-get install -y python3 make g++ gcc && rm -rf /var/lib/apt/lists/*
 RUN npm install -g pm2 pnpm
 
 # Copy package files
