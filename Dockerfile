@@ -18,8 +18,10 @@ COPY vite.config.ts ./
 COPY ecosystem.config.js ./
 COPY server/ ./server/
 
-# Install with pnpm (allow build scripts)
-RUN pnpm config set ignore-build-scripts false && pnpm install
+# Install with pnpm, rebuild better-sqlite3 with pnpm (not npm)
+RUN pnpm config set ignore-build-scripts false && \
+    pnpm install && \
+    pnpm rebuild better-sqlite3
 
 # Copy source code
 COPY src/ ./src/
@@ -42,7 +44,7 @@ FROM node:18-bullseye-slim AS production
 
 WORKDIR /app
 
-# Install PM2 + pnpm
+# Install build tools + PM2 + pnpm
 RUN apt-get update && apt-get install -y python3 make g++ gcc && rm -rf /var/lib/apt/lists/*
 RUN npm install -g pm2 pnpm
 
@@ -52,8 +54,10 @@ COPY tsconfig*.json ./
 COPY drizzle.config.ts ./
 COPY ecosystem.config.js ./
 
-# Install production deps (allow build scripts)
-RUN pnpm config set ignore-build-scripts false && pnpm install --prod
+# Install production deps + rebuild better-sqlite3 with pnpm
+RUN pnpm config set ignore-build-scripts false && \
+    pnpm install --prod && \
+    pnpm rebuild better-sqlite3
 
 # Copy built files
 COPY --from=builder /app/dist ./dist
