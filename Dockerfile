@@ -8,7 +8,7 @@ WORKDIR /app
 
 # Install build tools + pnpm
 RUN apt-get update && apt-get install -y python3 make g++ gcc && rm -rf /var/lib/apt/lists/*
-RUN npm install -g pnpm
+RUN npm install -g pnpm node-gyp
 
 # Copy package files
 COPY package*.json ./
@@ -18,8 +18,11 @@ COPY vite.config.ts ./
 COPY ecosystem.config.js ./
 COPY server/ ./server/
 
-# Install dependencies with pnpm + rebuild native bindings
-RUN pnpm install && pnpm rebuild better-sqlite3
+# Install dependencies with pnpm
+RUN pnpm install
+
+# Build better-sqlite3 from source (critical for Docker compatibility)
+RUN pnpm rebuild better-sqlite3 --build-from-source
 
 # Copy source code
 COPY src/ ./src/
@@ -43,7 +46,7 @@ FROM node:18-slim AS production
 WORKDIR /app
 
 # Install PM2 + pnpm
-RUN npm install -g pm2 pnpm
+RUN npm install -g pm2 pnpm node-gyp
 
 # Copy package files
 COPY package*.json ./
@@ -51,8 +54,8 @@ COPY tsconfig*.json ./
 COPY drizzle.config.ts ./
 COPY ecosystem.config.js ./
 
-# Install production deps with pnpm
-RUN pnpm install --prod && pnpm rebuild better-sqlite3
+# Install production deps
+RUN pnpm install --prod && pnpm rebuild better-sqlite3 --build-from-source
 
 # Copy built files
 COPY --from=builder /app/dist ./dist
