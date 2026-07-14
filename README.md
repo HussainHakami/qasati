@@ -109,3 +109,5 @@ Built with Docker
 <!-- build v14 - individual installs -->
 
 <!-- build v15 - pnpm -->
+
+<!-- build v16 - pnpm rebuild -->
