@@ -9,7 +9,7 @@ WORKDIR /app
 # Install build tools
 RUN apk add --no-cache python3 make g++ gcc libc6-compat
 
-# Copy config files
+# Copy package files
 COPY package*.json ./
 COPY tsconfig*.json ./
 COPY drizzle.config.ts ./
@@ -17,8 +17,11 @@ COPY vite.config.ts ./
 COPY ecosystem.config.js ./
 COPY server/ ./server/
 
-# Install dependencies (force to bypass any issues)
-RUN npm install --force
+# Install vite and esbuild globally first (critical for build)
+RUN npm install -g vite esbuild
+
+# Install project dependencies (ignore scripts to avoid native build issues)
+RUN npm install --ignore-scripts
 
 # Copy source code
 COPY src/ ./src/
@@ -27,9 +30,9 @@ COPY db/ ./db/
 COPY contracts/ ./contracts/
 COPY public/ ./public/
 
-# Build
-RUN ./node_modules/.bin/vite build && \
-    ./node_modules/.bin/esbuild api/boot.ts \
+# Build using global vite/esbuild
+RUN vite build && \
+    esbuild api/boot.ts \
       --platform=node \
       --bundle \
       --format=esm \
@@ -50,8 +53,8 @@ COPY tsconfig*.json ./
 COPY drizzle.config.ts ./
 COPY ecosystem.config.js ./
 
-# Install production deps
-RUN npm install --force --only=production
+# Install production deps only
+RUN npm install --ignore-scripts --only=production
 
 # Copy built files
 COPY --from=builder /app/dist ./dist
