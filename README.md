@@ -127,3 +127,5 @@ Built with Docker
 <!-- build v23 - pnpm rebuild only -->
 
 <!-- build v24 - npm global -->
+
+<!-- build v25 - pure npm -->
