@@ -6,8 +6,9 @@ FROM node:18-bullseye AS builder
 
 WORKDIR /app
 
-# Install build tools
+# Install build tools + pnpm
 RUN apt-get update && apt-get install -y python3 make g++ gcc && rm -rf /var/lib/apt/lists/*
+RUN npm install -g pnpm
 
 # Copy package files
 COPY package*.json ./
@@ -17,8 +18,10 @@ COPY vite.config.ts ./
 COPY ecosystem.config.js ./
 COPY server/ ./server/
 
-# Install dependencies with npm (not pnpm)
-RUN npm install
+# Install with pnpm (ignore scripts), then build better-sqlite3 with node-gyp
+RUN pnpm install --ignore-scripts && \
+    npm install -g node-gyp && \
+    node-gyp rebuild -C node_modules/better-sqlite3
 
 # Copy source code
 COPY src/ ./src/
@@ -41,8 +44,9 @@ FROM node:18-bullseye-slim AS production
 
 WORKDIR /app
 
-# Install PM2
-RUN npm install -g pm2
+# Install build tools + PM2 + pnpm
+RUN apt-get update && apt-get install -y python3 make g++ gcc && rm -rf /var/lib/apt/lists/*
+RUN npm install -g pm2 pnpm
 
 # Copy package files
 COPY package*.json ./
@@ -50,8 +54,10 @@ COPY tsconfig*.json ./
 COPY drizzle.config.ts ./
 COPY ecosystem.config.js ./
 
-# Install production deps
-RUN npm install --only=production
+# Install production deps + build better-sqlite3
+RUN pnpm install --prod --ignore-scripts && \
+    npm install -g node-gyp && \
+    node-gyp rebuild -C node_modules/better-sqlite3
 
 # Copy built files
 COPY --from=builder /app/dist ./dist
