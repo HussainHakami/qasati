@@ -107,3 +107,5 @@ Built with Docker
 <!-- build v13 - node18 ignore-scripts -->
 
 <!-- build v14 - individual installs -->
+
+<!-- build v15 - pnpm -->
