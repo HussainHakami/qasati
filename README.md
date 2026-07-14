@@ -133,3 +133,5 @@ Built with Docker
 <!-- build v26 - node-gyp -->
 
 <!-- build v27 - node20 -->
+
+<!-- build v28 - copy bindings -->
