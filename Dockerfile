@@ -2,7 +2,7 @@
 # Multi-stage build for production
 
 # Stage 1: Build
-FROM node:18-alpine AS builder
+FROM node:18 AS builder
 
 WORKDIR /app
 
@@ -27,7 +27,7 @@ COPY public/ ./public/
 RUN npm run build
 
 # Stage 2: Production
-FROM node:18-alpine AS production
+FROM node:18-slim AS production
 
 WORKDIR /app
 
