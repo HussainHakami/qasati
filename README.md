@@ -101,3 +101,5 @@ Built with Docker
 <!-- build v10 - rebuild -->
 
 <!-- build v11 - npm ci -->
+
+<!-- build v12 - maxsockets -->
