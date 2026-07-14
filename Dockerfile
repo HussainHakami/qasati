@@ -6,8 +6,9 @@ FROM node:18 AS builder
 
 WORKDIR /app
 
-# Install build tools
+# Install build tools + pnpm
 RUN apt-get update && apt-get install -y python3 make g++ gcc && rm -rf /var/lib/apt/lists/*
+RUN npm install -g pnpm
 
 # Copy package files
 COPY package*.json ./
@@ -17,14 +18,8 @@ COPY vite.config.ts ./
 COPY ecosystem.config.js ./
 COPY server/ ./server/
 
-# Step 1: Install deps without scripts (fast, stable)
-RUN npm install --ignore-scripts
-
-# Step 2: Install packages that need postinstall scripts individually
-RUN npm install @hono/vite-dev-server esbuild
-
-# Step 3: Rebuild native bindings
-RUN npm rebuild better-sqlite3
+# Install dependencies with pnpm
+RUN pnpm install
 
 # Copy source code
 COPY src/ ./src/
@@ -33,9 +28,9 @@ COPY db/ ./db/
 COPY contracts/ ./contracts/
 COPY public/ ./public/
 
-# Build using npx (vite/esbuild now in node_modules)
-RUN ./node_modules/.bin/vite build && \
-    ./node_modules/.bin/esbuild api/boot.ts \
+# Build
+RUN pnpm vite build && \
+    pnpm esbuild api/boot.ts \
       --platform=node \
       --bundle \
       --format=esm \
@@ -47,8 +42,8 @@ FROM node:18-slim AS production
 
 WORKDIR /app
 
-# Install PM2
-RUN npm install -g pm2
+# Install PM2 + pnpm
+RUN npm install -g pm2 pnpm
 
 # Copy package files
 COPY package*.json ./
@@ -56,9 +51,8 @@ COPY tsconfig*.json ./
 COPY drizzle.config.ts ./
 COPY ecosystem.config.js ./
 
-# Install production deps (ignore-scripts for stability)
-RUN npm install --ignore-scripts --only=production && \
-    npm rebuild better-sqlite3
+# Install production deps with pnpm
+RUN pnpm install --prod
 
 # Copy built files
 COPY --from=builder /app/dist ./dist
