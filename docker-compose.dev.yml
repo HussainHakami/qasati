@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  qasati-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: qasati-dev
+    ports:
+      - "3000:3000"
+    env_file:
+      # Load all environment variables from .env file
+      - .env
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+      - VITE_APP_ID=${VITE_APP_ID}
+      - VITE_KIMI_AUTH_URL=${VITE_KIMI_AUTH_URL}
+    volumes:
+      # Mount source code for hot reload (frontend)
+      - ./src:/app/src
+      # Mount backend code for hot reload
+      - ./api:/app/api
+      - ./db:/app/db
+      - ./contracts:/app/contracts
+      - ./server:/app/server
+      - ./public:/app/public
+      # Mount .env for config changes without rebuild
+      - ./.env:/app/.env
+      # Ensure node_modules is not overwritten by host
+      - /app/node_modules
+    restart: unless-stopped
+    # Interactive mode for better dev experience
+    stdin_open: true
+    tty: true
