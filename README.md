@@ -99,3 +99,5 @@ Built with Docker
 <!-- build v9 - global vite -->
 
 <!-- build v10 - rebuild -->
+
+<!-- build v11 - npm ci -->
