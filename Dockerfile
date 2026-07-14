@@ -6,7 +6,12 @@ FROM node:20 AS builder
 
 WORKDIR /app
 
-# Install yarn globally (more stable than npm in Docker)
+# Install build tools for native bindings (sqlite3, etc.)
+RUN apt-get update && apt-get install -y \
+    python3 make g++ gcc \
+    && rm -rf /var/lib/apt/lists/*
+
+# Enable yarn
 RUN corepack enable && corepack prepare yarn@stable --activate
 
 # Copy config files
@@ -17,7 +22,7 @@ COPY vite.config.ts ./
 COPY ecosystem.config.js ./
 COPY server/ ./server/
 
-# Install dependencies with yarn
+# Install dependencies
 RUN yarn install --frozen-lockfile || yarn install
 
 # Copy source code
@@ -27,7 +32,7 @@ COPY db/ ./db/
 COPY contracts/ ./contracts/
 COPY public/ ./public/
 
-# Build with explicit paths
+# Build
 RUN yarn vite build && \
     yarn esbuild api/boot.ts \
       --platform=node \
@@ -61,7 +66,6 @@ COPY --from=builder /app/db ./db
 COPY --from=builder /app/contracts ./contracts
 COPY --from=builder /app/public ./public
 
-# Create directories
 RUN mkdir -p /app/data /app/logs
 
 EXPOSE 3000
