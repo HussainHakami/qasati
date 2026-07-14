@@ -2,7 +2,7 @@
 # Multi-stage build for production
 
 # Stage 1: Build
-FROM node:20 AS builder
+FROM node:18 AS builder
 
 WORKDIR /app
 
@@ -17,8 +17,12 @@ COPY vite.config.ts ./
 COPY ecosystem.config.js ./
 COPY server/ ./server/
 
-# Install dependencies (maxsockets=1 for stability in Docker)
-RUN npm install --maxsockets=1 && npm rebuild better-sqlite3
+# Install vite/esbuild globally + project deps without scripts
+RUN npm install -g vite esbuild && \
+    npm install --ignore-scripts
+
+# Rebuild native bindings (better-sqlite3)
+RUN npm rebuild better-sqlite3
 
 # Copy source code
 COPY src/ ./src/
@@ -27,9 +31,9 @@ COPY db/ ./db/
 COPY contracts/ ./contracts/
 COPY public/ ./public/
 
-# Build
-RUN ./node_modules/.bin/vite build && \
-    ./node_modules/.bin/esbuild api/boot.ts \
+# Build using global vite/esbuild
+RUN vite build && \
+    esbuild api/boot.ts \
       --platform=node \
       --bundle \
       --format=esm \
@@ -37,7 +41,7 @@ RUN ./node_modules/.bin/vite build && \
       --banner:js="import { createRequire } from 'module';const require = createRequire(import.meta.url);"
 
 # Stage 2: Production
-FROM node:20-slim AS production
+FROM node:18-slim AS production
 
 WORKDIR /app
 
@@ -51,7 +55,8 @@ COPY drizzle.config.ts ./
 COPY ecosystem.config.js ./
 
 # Install production deps
-RUN npm install --maxsockets=1 --omit=dev && npm rebuild better-sqlite3
+RUN npm install --ignore-scripts --only=production && \
+    npm rebuild better-sqlite3
 
 # Copy built files
 COPY --from=builder /app/dist ./dist
