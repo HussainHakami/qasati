@@ -105,3 +105,5 @@ Built with Docker
 <!-- build v12 - maxsockets -->
 
 <!-- build v13 - node18 ignore-scripts -->
+
+<!-- build v14 - individual installs -->
