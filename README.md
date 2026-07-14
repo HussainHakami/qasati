@@ -93,3 +93,5 @@ Built with Docker
 <!-- build v6 - build tools -->
 
 <!-- build v7 - npm+rebuild -->
+
+<!-- build v8 - alpine+force -->
