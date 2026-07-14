@@ -17,11 +17,12 @@ COPY vite.config.ts ./
 COPY ecosystem.config.js ./
 COPY server/ ./server/
 
-# Install vite and esbuild globally first (critical for build)
+# Install vite and esbuild globally (for build)
 RUN npm install -g vite esbuild
 
-# Install project dependencies (ignore scripts to avoid native build issues)
-RUN npm install --ignore-scripts
+# Install dependencies (no-audit no-fund for speed, then rebuild native)
+RUN npm install --no-audit --no-fund && \
+    npm rebuild better-sqlite3
 
 # Copy source code
 COPY src/ ./src/
@@ -30,7 +31,7 @@ COPY db/ ./db/
 COPY contracts/ ./contracts/
 COPY public/ ./public/
 
-# Build using global vite/esbuild
+# Build
 RUN vite build && \
     esbuild api/boot.ts \
       --platform=node \
@@ -53,8 +54,9 @@ COPY tsconfig*.json ./
 COPY drizzle.config.ts ./
 COPY ecosystem.config.js ./
 
-# Install production deps only
-RUN npm install --ignore-scripts --only=production
+# Install production deps
+RUN npm install --no-audit --no-fund --only=production && \
+    npm rebuild better-sqlite3
 
 # Copy built files
 COPY --from=builder /app/dist ./dist
