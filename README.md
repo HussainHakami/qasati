@@ -123,3 +123,5 @@ Built with Docker
 <!-- build v21 - pnpm rebuild -->
 
 <!-- build v22 - bullseye -->
+
+<!-- build v23 - pnpm rebuild only -->
