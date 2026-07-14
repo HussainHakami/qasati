@@ -17,8 +17,8 @@ COPY vite.config.ts ./
 COPY ecosystem.config.js ./
 COPY server/ ./server/
 
-# Install dependencies with npm ci (stable) + rebuild native
-RUN npm ci && npm rebuild better-sqlite3
+# Install dependencies (maxsockets=1 for stability in Docker)
+RUN npm install --maxsockets=1 && npm rebuild better-sqlite3
 
 # Copy source code
 COPY src/ ./src/
@@ -51,7 +51,7 @@ COPY drizzle.config.ts ./
 COPY ecosystem.config.js ./
 
 # Install production deps
-RUN npm ci --only=production && npm rebuild better-sqlite3
+RUN npm install --maxsockets=1 --omit=dev && npm rebuild better-sqlite3
 
 # Copy built files
 COPY --from=builder /app/dist ./dist
