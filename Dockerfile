@@ -6,13 +6,10 @@ FROM node:20 AS builder
 
 WORKDIR /app
 
-# Install build tools for native bindings (sqlite3, etc.)
+# Install build tools for native bindings
 RUN apt-get update && apt-get install -y \
     python3 make g++ gcc \
     && rm -rf /var/lib/apt/lists/*
-
-# Enable yarn
-RUN corepack enable && corepack prepare yarn@stable --activate
 
 # Copy config files
 COPY package*.json ./
@@ -23,7 +20,10 @@ COPY ecosystem.config.js ./
 COPY server/ ./server/
 
 # Install dependencies
-RUN yarn install --frozen-lockfile || yarn install
+RUN npm install
+
+# Rebuild native bindings (sqlite3, etc.)
+RUN npm rebuild
 
 # Copy source code
 COPY src/ ./src/
@@ -33,8 +33,8 @@ COPY contracts/ ./contracts/
 COPY public/ ./public/
 
 # Build
-RUN yarn vite build && \
-    yarn esbuild api/boot.ts \
+RUN ./node_modules/.bin/vite build && \
+    ./node_modules/.bin/esbuild api/boot.ts \
       --platform=node \
       --bundle \
       --format=esm \
