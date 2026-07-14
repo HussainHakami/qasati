@@ -18,12 +18,12 @@ COPY vite.config.ts ./
 COPY ecosystem.config.js ./
 COPY server/ ./server/
 
-# Install deps + build better-sqlite3 + copy to expected path
+# Install deps + build better-sqlite3 + copy to correct ABI path (v115 for Node 20)
 RUN pnpm install --ignore-scripts && \
     npm install -g node-gyp && \
     node-gyp rebuild -C node_modules/better-sqlite3 && \
-    mkdir -p node_modules/better-sqlite3/lib/binding/node-v108-linux-x64 && \
-    cp node_modules/better-sqlite3/build/Release/better_sqlite3.node node_modules/better-sqlite3/lib/binding/node-v108-linux-x64/
+    mkdir -p node_modules/better-sqlite3/lib/binding/node-v115-linux-x64 && \
+    cp node_modules/better-sqlite3/build/Release/better_sqlite3.node node_modules/better-sqlite3/lib/binding/node-v115-linux-x64/
 
 # Copy source code
 COPY src/ ./src/
@@ -56,12 +56,12 @@ COPY tsconfig*.json ./
 COPY drizzle.config.ts ./
 COPY ecosystem.config.js ./
 
-# Install production deps + build better-sqlite3 + copy to expected path
+# Install production deps + build better-sqlite3 + copy to correct ABI path
 RUN pnpm install --prod --ignore-scripts && \
     npm install -g node-gyp && \
     node-gyp rebuild -C node_modules/better-sqlite3 && \
-    mkdir -p node_modules/better-sqlite3/lib/binding/node-v108-linux-x64 && \
-    cp node_modules/better-sqlite3/build/Release/better_sqlite3.node node_modules/better-sqlite3/lib/binding/node-v108-linux-x64/
+    mkdir -p node_modules/better-sqlite3/lib/binding/node-v115-linux-x64 && \
+    cp node_modules/better-sqlite3/build/Release/better_sqlite3.node node_modules/better-sqlite3/lib/binding/node-v115-linux-x64/
 
 # Copy built files
 COPY --from=builder /app/dist ./dist
