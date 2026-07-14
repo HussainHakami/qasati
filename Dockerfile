@@ -2,12 +2,12 @@
 # Multi-stage build for production
 
 # Stage 1: Build
-FROM node:20-alpine AS builder
+FROM node:20 AS builder
 
 WORKDIR /app
 
 # Install build tools
-RUN apk add --no-cache python3 make g++ gcc libc6-compat
+RUN apt-get update && apt-get install -y python3 make g++ gcc && rm -rf /var/lib/apt/lists/*
 
 # Copy package files
 COPY package*.json ./
@@ -17,12 +17,8 @@ COPY vite.config.ts ./
 COPY ecosystem.config.js ./
 COPY server/ ./server/
 
-# Install vite and esbuild globally (for build)
-RUN npm install -g vite esbuild
-
-# Install dependencies (no-audit no-fund for speed, then rebuild native)
-RUN npm install --no-audit --no-fund && \
-    npm rebuild better-sqlite3
+# Install dependencies with npm ci (stable) + rebuild native
+RUN npm ci && npm rebuild better-sqlite3
 
 # Copy source code
 COPY src/ ./src/
@@ -32,8 +28,8 @@ COPY contracts/ ./contracts/
 COPY public/ ./public/
 
 # Build
-RUN vite build && \
-    esbuild api/boot.ts \
+RUN ./node_modules/.bin/vite build && \
+    ./node_modules/.bin/esbuild api/boot.ts \
       --platform=node \
       --bundle \
       --format=esm \
@@ -41,7 +37,7 @@ RUN vite build && \
       --banner:js="import { createRequire } from 'module';const require = createRequire(import.meta.url);"
 
 # Stage 2: Production
-FROM node:20-alpine AS production
+FROM node:20-slim AS production
 
 WORKDIR /app
 
@@ -55,8 +51,7 @@ COPY drizzle.config.ts ./
 COPY ecosystem.config.js ./
 
 # Install production deps
-RUN npm install --no-audit --no-fund --only=production && \
-    npm rebuild better-sqlite3
+RUN npm ci --only=production && npm rebuild better-sqlite3
 
 # Copy built files
 COPY --from=builder /app/dist ./dist
