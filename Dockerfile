@@ -2,9 +2,12 @@
 # Multi-stage build for production
 
 # Stage 1: Build
-FROM node:18 AS builder
+FROM node:20 AS builder
 
 WORKDIR /app
+
+# Install yarn globally (more stable than npm in Docker)
+RUN corepack enable && corepack prepare yarn@stable --activate
 
 # Copy config files
 COPY package*.json ./
@@ -12,22 +15,21 @@ COPY tsconfig*.json ./
 COPY drizzle.config.ts ./
 COPY vite.config.ts ./
 COPY ecosystem.config.js ./
+COPY server/ ./server/
 
-# Clean npm cache and install dependencies
-RUN npm cache clean --force && \
-    npm install --maxsockets=1
+# Install dependencies with yarn
+RUN yarn install --frozen-lockfile || yarn install
 
 # Copy source code
 COPY src/ ./src/
-COPY server/ ./server/
 COPY api/ ./api/
 COPY db/ ./db/
 COPY contracts/ ./contracts/
 COPY public/ ./public/
 
-# Build with explicit node_modules path
-RUN ./node_modules/.bin/vite build && \
-    ./node_modules/.bin/esbuild api/boot.ts \
+# Build with explicit paths
+RUN yarn vite build && \
+    yarn esbuild api/boot.ts \
       --platform=node \
       --bundle \
       --format=esm \
@@ -35,7 +37,7 @@ RUN ./node_modules/.bin/vite build && \
       --banner:js="import { createRequire } from 'module';const require = createRequire(import.meta.url);"
 
 # Stage 2: Production
-FROM node:18-slim AS production
+FROM node:20-slim AS production
 
 WORKDIR /app
 
@@ -49,8 +51,7 @@ COPY drizzle.config.ts ./
 COPY ecosystem.config.js ./
 
 # Install production deps
-RUN npm cache clean --force && \
-    npm install --maxsockets=1 --only=production
+RUN npm install --only=production
 
 # Copy built files
 COPY --from=builder /app/dist ./dist
