@@ -6,9 +6,8 @@ FROM node:18-bullseye AS builder
 
 WORKDIR /app
 
-# Install build tools + pnpm
+# Install build tools
 RUN apt-get update && apt-get install -y python3 make g++ gcc && rm -rf /var/lib/apt/lists/*
-RUN npm install -g pnpm
 
 # Copy package files
 COPY package*.json ./
@@ -18,12 +17,8 @@ COPY vite.config.ts ./
 COPY ecosystem.config.js ./
 COPY server/ ./server/
 
-# Install all deps with pnpm (ignore scripts for speed)
-RUN pnpm install --ignore-scripts
-
-# Install better-sqlite3 globally with npm and build from source
-RUN npm install -g better-sqlite3 --build-from-source && \
-    npm link better-sqlite3
+# Install dependencies with npm (not pnpm)
+RUN npm install
 
 # Copy source code
 COPY src/ ./src/
@@ -33,8 +28,8 @@ COPY contracts/ ./contracts/
 COPY public/ ./public/
 
 # Build
-RUN pnpm vite build && \
-    pnpm esbuild api/boot.ts \
+RUN ./node_modules/.bin/vite build && \
+    ./node_modules/.bin/esbuild api/boot.ts \
       --platform=node \
       --bundle \
       --format=esm \
@@ -46,9 +41,8 @@ FROM node:18-bullseye-slim AS production
 
 WORKDIR /app
 
-# Install build tools + PM2 + pnpm
-RUN apt-get update && apt-get install -y python3 make g++ gcc && rm -rf /var/lib/apt/lists/*
-RUN npm install -g pm2 pnpm
+# Install PM2
+RUN npm install -g pm2
 
 # Copy package files
 COPY package*.json ./
@@ -56,12 +50,8 @@ COPY tsconfig*.json ./
 COPY drizzle.config.ts ./
 COPY ecosystem.config.js ./
 
-# Install production deps with pnpm
-RUN pnpm install --prod --ignore-scripts
-
-# Install better-sqlite3 globally and link
-RUN npm install -g better-sqlite3 --build-from-source && \
-    npm link better-sqlite3
+# Install production deps
+RUN npm install --only=production
 
 # Copy built files
 COPY --from=builder /app/dist ./dist
