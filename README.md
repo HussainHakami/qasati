@@ -115,3 +115,5 @@ Built with Docker
 <!-- build v17 - build from source -->
 
 <!-- build v18 - allow scripts -->
+
+<!-- build v19 - pnpm+npm rebuild -->
