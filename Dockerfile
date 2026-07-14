@@ -11,8 +11,6 @@ COPY package*.json ./
 COPY tsconfig*.json ./
 COPY drizzle.config.ts ./
 COPY vite.config.ts ./
-# Note: .env is not copied - environment variables passed at runtime
-# via docker-compose or docker run --env-file
 
 # Install dependencies
 RUN npm ci
@@ -40,7 +38,6 @@ RUN npm install -g pm2
 COPY package*.json ./
 COPY tsconfig*.json ./
 COPY drizzle.config.ts ./
-# .env passed at runtime via docker-compose or --env-file
 
 # Install production dependencies only
 RUN npm ci --only=production
@@ -52,15 +49,14 @@ COPY --from=builder /app/api ./api
 COPY --from=builder /app/db ./db
 COPY --from=builder /app/contracts ./contracts
 
+# Copy PM2 config
+COPY ecosystem.config.js ./
+
 # Create data directory
-RUN mkdir -p /app/data
+RUN mkdir -p /app/data /app/logs
 
 # Expose port
 EXPOSE 3000
-
-# Health check
-HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD wget --no-verbose --tries=1 --spider http://localhost:3000/api/ping || exit 1
 
 # Start with PM2
 CMD ["pm2-runtime", "start", "ecosystem.config.js"]
