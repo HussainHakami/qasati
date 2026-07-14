@@ -1,18 +1,19 @@
 # Qasati - Dockerfile
 # Multi-stage build for production
 
-# Stage 1: Build
+# Stage 1: Build (uses full node image with dev dependencies)
 FROM node:18 AS builder
 
 WORKDIR /app
 
-# Copy package files
+# Copy all config files first
 COPY package*.json ./
 COPY tsconfig*.json ./
 COPY drizzle.config.ts ./
 COPY vite.config.ts ./
+COPY ecosystem.config.js ./
 
-# Install dependencies
+# Install ALL dependencies (including devDependencies for build)
 RUN npm ci
 
 # Copy source code
@@ -23,36 +24,44 @@ COPY db/ ./db/
 COPY contracts/ ./contracts/
 COPY public/ ./public/
 
-# Build frontend and backend
-RUN npm run build
+# Create empty .env for build (Vite may need it)
+RUN echo "VITE_APP_ID=dummy" > .env
 
-# Stage 2: Production
+# Build frontend (vite) and backend (esbuild)
+RUN npx vite build && \
+    npx esbuild api/boot.ts \
+      --platform=node \
+      --bundle \
+      --format=esm \
+      --outdir=dist \
+      --banner:js="import { createRequire } from 'module';const require = createRequire(import.meta.url);"
+
+# Stage 2: Production (slim image with only production deps)
 FROM node:18-slim AS production
 
 WORKDIR /app
 
-# Install PM2 for process management
+# Install PM2 globally
 RUN npm install -g pm2
 
 # Copy package files
 COPY package*.json ./
 COPY tsconfig*.json ./
 COPY drizzle.config.ts ./
+COPY ecosystem.config.js ./
 
-# Install production dependencies only
+# Install only production dependencies
 RUN npm ci --only=production
 
-# Copy built files
+# Copy built files from builder
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/server ./server
 COPY --from=builder /app/api ./api
 COPY --from=builder /app/db ./db
 COPY --from=builder /app/contracts ./contracts
+COPY --from=builder /app/public ./public
 
-# Copy PM2 config
-COPY ecosystem.config.js ./
-
-# Create data directory
+# Create directories
 RUN mkdir -p /app/data /app/logs
 
 # Expose port
