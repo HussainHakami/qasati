@@ -11,7 +11,8 @@ COPY package*.json ./
 COPY tsconfig*.json ./
 COPY drizzle.config.ts ./
 COPY vite.config.ts ./
-COPY .env ./
+# Note: .env is not copied - environment variables passed at runtime
+# via docker-compose or docker run --env-file
 
 # Install dependencies
 RUN npm ci
@@ -39,7 +40,7 @@ RUN npm install -g pm2
 COPY package*.json ./
 COPY tsconfig*.json ./
 COPY drizzle.config.ts ./
-COPY .env ./
+# .env passed at runtime via docker-compose or --env-file
 
 # Install production dependencies only
 RUN npm ci --only=production
