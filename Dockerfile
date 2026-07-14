@@ -2,7 +2,7 @@
 # Multi-stage build for production
 
 # Stage 1: Build
-FROM node:18 AS builder
+FROM node:18-bullseye AS builder
 
 WORKDIR /app
 
@@ -18,10 +18,8 @@ COPY vite.config.ts ./
 COPY ecosystem.config.js ./
 COPY server/ ./server/
 
-# Install with pnpm (allow build scripts), rebuild better-sqlite3
-RUN pnpm config set ignore-build-scripts false && \
-    pnpm install && \
-    pnpm rebuild better-sqlite3
+# Install with pnpm (allow build scripts)
+RUN pnpm config set ignore-build-scripts false && pnpm install
 
 # Copy source code
 COPY src/ ./src/
@@ -40,11 +38,11 @@ RUN pnpm vite build && \
       --banner:js="import { createRequire } from 'module';const require = createRequire(import.meta.url);"
 
 # Stage 2: Production
-FROM node:18-slim AS production
+FROM node:18-bullseye-slim AS production
 
 WORKDIR /app
 
-# Install build tools + PM2 + pnpm
+# Install PM2 + pnpm
 RUN apt-get update && apt-get install -y python3 make g++ gcc && rm -rf /var/lib/apt/lists/*
 RUN npm install -g pm2 pnpm
 
@@ -54,10 +52,8 @@ COPY tsconfig*.json ./
 COPY drizzle.config.ts ./
 COPY ecosystem.config.js ./
 
-# Install production deps + rebuild better-sqlite3
-RUN pnpm config set ignore-build-scripts false && \
-    pnpm install --prod && \
-    pnpm rebuild better-sqlite3
+# Install production deps (allow build scripts)
+RUN pnpm config set ignore-build-scripts false && pnpm install --prod
 
 # Copy built files
 COPY --from=builder /app/dist ./dist
