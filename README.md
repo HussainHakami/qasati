@@ -91,3 +91,5 @@ Built with Docker
 <!-- build v5 - node20+yarn -->
 
 <!-- build v6 - build tools -->
+
+<!-- build v7 - npm+rebuild -->
