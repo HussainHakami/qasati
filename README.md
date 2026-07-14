@@ -129,3 +129,5 @@ Built with Docker
 <!-- build v24 - npm global -->
 
 <!-- build v25 - pure npm -->
+
+<!-- build v26 - node-gyp -->
