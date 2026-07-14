@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <meta name="description" content="قسطي - نظام إدارة العقود والأقساط المتكامل">
+  <meta name="theme-color" content="#0A1628">
+  <title>قسطي — نظام إدارة العقود والأقساط</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Reem+Kufi:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./src/index.css">
+</head>
+<body>
+
+<!-- ========== NAVIGATION ========== -->
+<nav class="fixed top-0 left-0 right-0 z-50 h-[80px]" style="background: rgba(10, 22, 40, 0.75); backdrop-filter: blur(30px) saturate(1.2); border-bottom: 1px solid rgba(212, 175, 55, 0.15);">
+  <div class="max-w-[1400px] mx-auto h-full flex items-center justify-between px-8">
+    <!-- Logo -->
+    <a href="#hero" class="flex items-center gap-2 no-underline group">
+      <span class="font-kufi text-[28px] font-bold tracking-[1px]" style="color: #D4AF37;">قسطي</span>
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <circle cx="10" cy="10" r="9" stroke="#D4AF37" stroke-width="1.5"/>
+        <path d="M10 4v6l4 2" stroke="#D4AF37" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </a>
+    <!-- Nav Links -->
+    <div class="hidden md:flex items-center gap-8">
+      <a href="#hero" class="nav-link active">الرئيسية</a>
+      <a href="#features" class="nav-link">المميزات</a>
+      <a href="#demo" class="nav-link">تجربة</a>
+      <a href="#workflow" class="nav-link">آلية العمل</a>
+      <a href="#pricing" class="nav-link">الباقات</a>
+      <a href="#faq" class="nav-link">الأسئلة</a>
+    </div>
+    <!-- CTA -->
+    <a href="#cta" class="hidden md:inline-flex btn-primary text-sm px-7 py-3">ابدأ مجاناً</a>
+    <!-- Mobile Toggle -->
+    <button class="md:hidden" id="mobileMenuToggle" aria-label="Open menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2" stroke-linecap="round">
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <line x1="3" y1="12" x2="21" y2="12"/>
+        <line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+  </div>
+  <!-- Mobile Menu -->
+  <div id="mobileMenu" class="hidden md:hidden absolute top-[80px] left-0 right-0 p-6" style="background: rgba(10, 22, 40, 0.97); backdrop-filter: blur(30px); border-top: 1px solid rgba(212, 175, 55, 0.15);">
+    <div class="flex flex-col gap-4 items-center">
+      <a href="#hero" class="nav-link active">الرئيسية</a>
+      <a href="#features" class="nav-link">المميزات</a>
+      <a href="#demo" class="nav-link">تجربة</a>
+      <a href="#workflow" class="nav-link">آلية العمل</a>
+      <a href="#pricing" class="nav-link">الباقات</a>
+      <a href="#faq" class="nav-link">الأسئلة</a>
+      <a href="#cta" class="btn-primary text-sm px-7 py-3 mt-2">ابدأ مجاناً</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ========== HERO ========== -->
+<section id="hero" class="min-h-screen relative flex items-center overflow-hidden" style="background: #0A1628;">
+  <!-- Grid Background -->
+  <div class="hero-grid absolute inset-0 opacity-[0.04]"></div>
+  <!-- Radial Glow -->
+  <div class="absolute top-1/2 right-[30%] w-[600px] h-[600px] rounded-full opacity-[0.07]" style="background: radial-gradient(circle, #D4AF37 0%, transparent 70%); transform: translate(50%, -50%); filter: blur(80px);"></div>
+  <!-- Diagonal Glow -->
+  <div class="diagonal-glow absolute bottom-0 left-0 w-full h-[400px] opacity-[0.03]" style="background: linear-gradient(135deg, #D4AF37 0%, transparent 60%);"></div>
+
+  <div class="max-w-[1400px] mx-auto px-8 pt-[80px] pb-20 relative z-10 w-full">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <!-- Text Content -->
+      <div class="text-right">
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold mb-6" style="background: rgba(212, 175, 55, 0.08); color: #D4AF37; border: 1px solid rgba(212, 175, 55, 0.25);">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="3" fill="#D4AF37"/><circle cx="6" cy="6" r="5.5" stroke="#D4AF37" stroke-width="1" opacity="0.4"/></svg>
+          نظام إدارة العقود والأقساط
+        </div>
+        <h1 class="hero-title text-[48px] md:text-[64px] lg:text-[72px] font-bold leading-[1.15] mb-6" style="font-family: 'Reem Kufi', sans-serif; color: #F5F0E0;">
+          أدِر عقودك<br>وأقساطك بكل<br><span style="color: #D4AF37;">ذكاء</span>
+        </h1>
+        <p class="text-lg md:text-xl leading-[1.8] mb-10 max-w-[500px]" style="color: #A3956B;">
+          قسطي يساعدك على تنظيم قروضك، تتبع أقساطك، وتذكير عملائك — كل ذلك من مكان واحد.
+        </p>
+        <div class="flex flex-wrap gap-4 justify-start">
+          <a href="#cta" class="btn-primary">ابدأ مجاناً</a>
+          <a href="#demo" class="btn-secondary">شاهد كيف يعمل</a>
+        </div>
+        <div class="mt-10 flex items-center gap-8">
+          <div class="text-center">
+            <span class="block text-2xl font-bold" style="color: #D4AF37;">+10,000</span>
+            <span class="text-xs" style="color: #A3956B;">عقد مُدار</span>
+          </div>
+          <div class="w-px h-10" style="background: rgba(212, 175, 55, 0.2);"></div>
+          <div class="text-center">
+            <span class="block text-2xl font-bold" style="color: #D4AF37;">+5,000</span>
+            <span class="text-xs" style="color: #A3956B;">مستخدم نشط</span>
+          </div>
+          <div class="w-px h-10" style="background: rgba(212, 175, 55, 0.2);"></div>
+          <div class="text-center">
+            <span class="block text-2xl font-bold" style="color: #D4AF37;">99.9%</span>
+            <span class="text-xs" style="color: #A3956B;">موثوقية</span>
+          </div>
+        </div>
+      </div>
+      <!-- Hero Image -->
+      <div class="relative hero-image-container">
+        <div class="w-full rounded-[16px] relative z-10 flex items-center justify-center" style="border: 2px solid rgba(212, 175, 55, 0.3); box-shadow: 0 40px 100px rgba(0,0,0,0.6); background: linear-gradient(135deg, #111D32, #0A1628); aspect-ratio: 16/10;">
+          <div class="text-center p-8">
+            <div class="w-20 h-20 rounded-full mx-auto mb-4 flex items-center justify-center" style="background: rgba(212, 175, 55, 0.1); border: 2px solid rgba(212, 175, 55, 0.2);">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+            </div>
+            <p class="text-lg font-bold mb-2" style="color: #D4AF37;">قسطي</p>
+            <p class="text-sm" style="color: #A3956B;">لوحة التحكم</p>
+          </div>
+        </div>
+        <!-- Glow behind image -->
+        <div class="absolute -inset-4 rounded-[20px] opacity-[0.15] -z-0" style="background: linear-gradient(135deg, #D4AF37, #B8960E); filter: blur(40px);"></div>
+        <!-- Floating badge -->
+        <div class="absolute -bottom-4 -left-4 px-4 py-3 rounded-xl z-20 flex items-center gap-3" style="background: rgba(10, 22, 40, 0.9); backdrop-filter: blur(20px); border: 1px solid rgba(212, 175, 55, 0.25); box-shadow: 0 8px 32px rgba(0,0,0,0.4);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#059669" stroke-width="2"/><path d="M8 12l3 3 5-6" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div>
+            <p class="text-sm font-bold" style="color: #F5F0E0;">تم التحصيل بنجاح</p>
+            <p class="text-xs" style="color: #A3956B;">2,500 ر.س — أحمد محمد</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll Indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-60">
+    <span class="text-xs tracking-wider" style="color: #A3956B;">اسحب للأسفل</span>
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#D4AF37" stroke-width="1.5" stroke-linecap="round" class="animate-bounce">
+      <path d="M10 4v12M4 11l6 6 6-6"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ========== TRUST BADGES ========== -->
+<section class="py-16" style="background: #0F1E36; border-top: 1px solid rgba(212, 175, 55, 0.08); border-bottom: 1px solid rgba(212, 175, 55, 0.08);">
+  <div class="max-w-[1400px] mx-auto px-8 text-center">
+    <p class="text-sm mb-8 tracking-wide" style="color: #A3956B;">موثوق من قبل آلاف المستخدمين في المملكة</p>
+    <div class="flex flex-wrap justify-center items-center gap-12 opacity-40">
+      <span class="text-lg font-bold" style="color: #D4AF37;">شركة التمويل الأولى</span>
+      <span class="text-lg font-bold" style="color: #D4AF37;">بنك الرياض</span>
+      <span class="text-lg font-bold" style="color: #D4AF37;">تمويلك</span>
+      <span class="text-lg font-bold" style="color: #D4AF37;">شركة الأنصاري</span>
+      <span class="text-lg font-bold" style="color: #D4AF37;">مرابحة</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ========== FEATURES ========== -->
+<section id="features" class="py-[140px] relative" style="background: #0A1628;">
+  <!-- Decorative left line -->
+  <div class="absolute top-[140px] right-0 w-[300px] h-px opacity-[0.15]" style="background: linear-gradient(to left, #D4AF37, transparent);"></div>
+
+  <div class="max-w-[1400px] mx-auto px-8">
+    <!-- Section Header -->
+    <div class="text-center mb-20">
+      <span class="inline-block text-xs font-semibold tracking-[3px] uppercase mb-4" style="color: #D4AF37;">المميزات</span>
+      <h2 class="text-[36px] md:text-[48px] font-bold mb-5" style="font-family: 'Reem Kufi', sans-serif; color: #F5F0E0;">كل ما تحتاجه في مكان واحد</h2>
+      <p class="text-lg max-w-[500px] mx-auto" style="color: #A3956B;">تصميمنا البسيط يخفي قوة كاملة من الأدوات التي تسهل عليك إدارة أقساطك.</p>
+    </div>
+
+    <!-- Feature Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Feature 1: Dashboard -->
+      <div class="feature-card p-8 rounded-[20px] group">
+        <div class="w-[48px] h-[48px] rounded-[14px] flex items-center justify-center mb-6" style="background: rgba(212, 175, 55, 0.08); border: 1px solid rgba(212, 175, 55, 0.15);">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#D4AF37" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="12" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="12" width="7" height="7" rx="1.5"/><rect x="12" y="12" width="7" height="7" rx="1.5"/></svg>
+        </div>
+        <h3 class="text-xl font-bold mb-2" style="color: #F5F0E0;">لوحة تحكم شاملة</h3>
+        <p class="text-sm leading-[1.7]" style="color: #A3956B;">شاهد إجمالي المبالغ المقرضة، المحصلة، المستحقة، والمتأخرة في لمحة واحدة مع رسوم بيانية تفاعلية.</p>
+      </div>
+
+      <!-- Feature 2: Contracts -->
+      <div class="feature-card p-8 rounded-[20px] group">
+        <div class="w-[48px] h-[48px] rounded-[14px] flex items-center justify-center mb-6" style="background: rgba(212, 175, 55, 0.08); border: 1px solid rgba(212, 175, 55, 0.15);">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#D4AF37" stroke-width="1.5" stroke-linecap="round"><path d="M11 3L4 7v8l7 4 7-4V7l-7-4z"/><path d="M11 11V7"/><path d="M11 11l4-2"/><circle cx="11" cy="11" r="8" stroke-dasharray="2 3" opacity="0.3"/></svg>
+        </div>
+        <h3 class="text-xl font-bold mb-2" style="color: #F5F0E0;">إدارة العقود</h3>
+        <p class="text-sm leading-[1.7]" style="color: #A3956B;">أضف عقود جديدة مع حساب تلقائي للأقساط والفوائد. تتبع حالة كل عقد (نشط / متأخر / مكتمل).</p>
+      </div>
+
+      <!-- Feature 3: Customers -->
+      <div class="feature-card p-8 rounded-[20px] group">
+        <div class="w-[48px] h-[48px] rounded-[14px] flex items-center justify-center mb-6" style="background: rgba(212, 175, 55, 0.08); border: 1px solid rgba(212, 175, 55, 0.15);">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#D4AF37" stroke-width="1.5" stroke-linecap="round"><path d="M16 18v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6"/><path d="M16 11h6"/></svg>
+        </div>
+        <h3 class="text-xl font-bold mb-2" style="color: #F5F0E0;">ملفات العملاء</h3>
+        <p class="text-sm leading-[1.7]" style="color: #A3956B;">احتفظ ببيانات عملائك وبيانات التواصل. تقييم كل عميل (موثوق / متوسط / متأخر).</p>
+      </div>
+
+      <!-- Feature 4: Payments -->
+      <div class="feature-card p-8 rounded-[20px] group">
+        <div class="w-[48px] h-[48px] rounded-[14px] flex items-center justify-center mb-6" style="background: rgba(212, 175, 55, 0.08); border: 1px solid rgba(212, 175, 55, 0.15);">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#D4AF37" stroke-width="1.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="M8 11h6"/><path d="M11 8v6"/><path d="M14 14l3 3"/></svg>
+        </div>
+        <h3 class="text-xl font-bold mb-2" style="color: #F5F0E0;">تسجيل التحصيل</h3>
+        <p class="text-sm leading-[1.7]" style="color: #A3956B;">سجل المبالغ المحصلة مع تاريخ وطريقة الدفع (كاش / تحويل / بنكي). تحديث تلقائي للأرصدة.</p>
+      </div>
+
+      <!-- Feature 5: Reminders -->
+      <div class="feature-card p-8 rounded-[20px] group">
+        <div class="w-[48px] h-[48px] rounded-[14px] flex items-center justify-center mb-6" style="background: rgba(212, 175, 55, 0.08); border: 1px solid rgba(212, 175, 55, 0.15);">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#D4AF37" stroke-width="1.5" stroke-linecap="round"><path d="M17 8A6 6 0 105 8c0 7-3 9-3 9h14s-3-2-3-9z"/><path d="M10 18a2 2 0 004 0"/></svg>
+        </div>
+        <h3 class="text-xl font-bold mb-2" style="color: #F5F0E0;">تذكيرات واتساب</h3>
+        <p class="text-sm leading-[1.7]" style="color: #A3956B;">أرسل تذكيرات تلقائية لعملائك عبر واتساب قبل موعد الاستحقاق. قوالب رسائل قابلة للتخصيص.</p>
+      </div>
+
+      <!-- Feature 6: Reports -->
+      <div class="feature-card p-8 rounded-[20px] group">
+        <div class="w-[48px] h-[48px] rounded-[14px] flex items-center justify-center mb-6" style="background: rgba(212, 175, 55, 0.08); border: 1px solid rgba(212, 175, 55, 0.15);">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#D4AF37" stroke-width="1.5" stroke-linecap="round"><path d="M4 17V10"/><path d="M10 17V6"/><path d="M16 17V13"/><path d="M2 17h18"/></svg>
+        </div>
+        <h3 class="text-xl font-bold mb-2" style="color: #F5F0E0;">تقارير وتحليلات</h3>
+        <p class="text-sm leading-[1.7]" style="color: #A3956B;">تقارير شهرية مفصلة بصيغة PDF. تحليل أداء العقود والأرباح. تصدير البيانات بسهولة.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== APP SHOWCASE / DEMO ========== -->
+<section id="demo" class="py-[140px] relative overflow-hidden" style="background: #0F1E36;">
+  <div class="max-w-[1400px] mx-auto px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <!-- Image -->
+      <div class="relative order-2 lg:order-1">
+        <div class="w-full rounded-[16px] relative z-10 flex items-center justify-center" style="border: 2px solid rgba(212, 175, 55, 0.25); box-shadow: 0 40px 100px rgba(0,0,0,0.5); background: linear-gradient(135deg, #111D32, #0A1628); aspect-ratio: 16/10;">
+          <div class="text-center p-8">
+            <div class="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center" style="background: rgba(212, 175, 55, 0.1); border: 2px solid rgba(212, 175, 55, 0.2);">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <p class="text-sm" style="color: #A3956B;">واجهة المستخدم</p>
+          </div>
+        </div>
+        <div class="absolute -inset-4 rounded-[20px] opacity-[0.1] -z-0" style="background: linear-gradient(135deg, #D4AF37, #B8960E); filter: blur(40px);"></div>
+      </div>
+      <!-- Text -->
+      <div class="order-1 lg:order-2 text-right">
+        <span class="inline-block text-xs font-semibold tracking-[3px] uppercase mb-4" style="color: #D4AF37;">تجربة الاستخدام</span>
+        <h2 class="text-[36px] md:text-[48px] font-bold mb-5 leading-[1.2]" style="font-family: 'Reem Kufi', sans-serif; color: #F5F0E0;">واجهة أنيقة<br>وسهلة الاستخدام</h2>
+        <p class="text-lg leading-[1.8] mb-8" style="color: #A3956B;">صممنا كل شاشة بعناية فائقة لتكون بسيطة وسهلة الاستخدام. لا حاجة لخبرة تقنية — ابدأ مباشرة.</p>
+        <ul class="space-y-4 mb-10">
+          <li class="flex items-center gap-3 text-sm" style="color: #A3956B;">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#D4AF37" stroke-width="1.5"/><path d="M6 10l3 3 5-5" stroke="#D4AF37" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            تصميم عصري بألوان ذهبية وأزرق داكن
+          </li>
+          <li class="flex items-center gap-3 text-sm" style="color: #A3956B;">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#D4AF37" stroke-width="1.5"/><path d="M6 10l3 3 5-5" stroke="#D4AF37" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            رسوم بيانية توضح حالة العقود والأقساط
+          </li>
+          <li class="flex items-center gap-3 text-sm" style="color: #A3956B;">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#D4AF37" stroke-width="1.5"/><path d="M6 10l3 3 5-5" stroke="#D4AF37" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            تنقل سريع بين الشاشات
+          </li>
+        </ul>
+        <a href="#cta" class="btn-primary">جربه الآن</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ========== WORKFLOW ========== -->
+<section id="workflow" class="py-[140px] relative" style="background: #0A1628;">
+  <div class="absolute top-0 left-0 right-0 h-px opacity-[0.08]" style="background: linear-gradient(to right, transparent, #D4AF37, transparent);"></div>
+
+  <div class="max-w-[1400px] mx-auto px-8">
+    <div class="text-center mb-20">
+      <span class="inline-block text-xs font-semibold tracking-[3px] uppercase mb-4" style="color: #D4AF37;">آلية العمل</span>
+      <h2 class="text-[36px] md:text-[48px] font-bold mb-5" style="font-family: 'Reem Kufi', sans-serif; color: #F5F0E0;">أربع خطوات وانتهيت</h2>
+      <p class="text-lg max-w-[500px] mx-auto" style="color: #A3956B;">لا تعقيد. لا إعدادات مطولة. ابدأ في دقائق.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
+      <!-- Connecting line (desktop) -->
+      <div class="hidden lg:block absolute top-[40px] left-[12.5%] right-[12.5%] h-px opacity-[0.15]" style="background: linear-gradient(to right, #D4AF37, #D4AF37);"></div>
+
+      <!-- Step 1 -->
+      <div class="text-center relative">
+        <div class="w-[80px] h-[80px] rounded-full flex items-center justify-center mx-auto mb-6 relative z-10" style="background: #111D32; border: 2px solid rgba(212, 175, 55, 0.3);">
+          <span class="text-2xl font-bold" style="color: #D4AF37;">01</span>
+        </div>
+        <h3 class="text-lg font-bold mb-2" style="color: #F5F0E0;">سجل الدخول</h3>
+        <p class="text-sm leading-[1.7]" style="color: #A3956B;">أنشئ حسابك في ثوانٍ. لا تحتاج لبطاقة ائتمان أو معلومات معقدة.</p>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="text-center relative">
+        <div class="w-[80px] h-[80px] rounded-full flex items-center justify-center mx-auto mb-6 relative z-10" style="background: #111D32; border: 2px solid rgba(212, 175, 55, 0.3);">
+          <span class="text-2xl font-bold" style="color: #D4AF37;">02</span>
+        </div>
+        <h3 class="text-lg font-bold mb-2" style="color: #F5F0E0;">أضف عملاءك</h3>
+        <p class="text-sm leading-[1.7]" style="color: #A3956B;">أضف بيانات عملائك والعقود. النظام يحسب الأقساط تلقائياً.</p>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="text-center relative">
+        <div class="w-[80px] h-[80px] rounded-full flex items-center justify-center mx-auto mb-6 relative z-10" style="background: #111D32; border: 2px solid rgba(212, 175, 55, 0.3);">
+          <span class="text-2xl font-bold" style="color: #D4AF37;">03</span>
+        </div>
+        <h3 class="text-lg font-bold mb-2" style="color: #F5F0E0;">تتبع الأقساط</h3>
+        <p class="text-sm leading-[1.7]" style="color: #A3956B;">تابع حالة كل قسط. تذكيرات تلقائية قبل الاستحقاق.</p>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="text-center relative">
+        <div class="w-[80px] h-[80px] rounded-full flex items-center justify-center mx-auto mb-6 relative z-10" style="background: #111D32; border: 2px solid rgba(212, 175, 55, 0.3);">
+          <span class="text-2xl font-bold" style="color: #D4AF37;">04</span>
+        </div>
+        <h3 class="text-lg font-bold mb-2" style="color: #F5F0E0;">سجل التحصيل</h3>
+        <p class="text-sm leading-[1.7]" style="color: #A3956B;">سجل المبالغ المحصلة بكبسة زر. تحديث فوري للأرصدة.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== STATS ========== -->
+<section class="py-20 relative overflow-hidden" style="background: #0F1E36;">
+  <div class="max-w-[1400px] mx-auto px-8">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+      <div class="text-center">
+        <span class="block text-[40px] md:text-[56px] font-bold mb-2" style="color: #D4AF37; font-family: 'Reem Kufi', sans-serif;">+10K</span>
+        <span class="text-sm" style="color: #A3956B;">عقد مُدار</span>
+      </div>
+      <div class="text-center">
+        <span class="block text-[40px] md:text-[56px] font-bold mb-2" style="color: #D4AF37; font-family: 'Reem Kufi', sans-serif;">+5K</span>
+        <span class="text-sm" style="color: #A3956B;">مستخدم نشط</span>
+      </div>
+      <div class="text-center">
+        <span class="block text-[40px] md:text-[56px] font-bold mb-2" style="color: #D4AF37; font-family: 'Reem Kufi', sans-serif;">+50M</span>
+        <span class="text-sm" style="color: #A3956B;">ريال تم تحصيله</span>
+      </div>
+      <div class="text-center">
+        <span class="block text-[40px] md:text-[56px] font-bold mb-2" style="color: #D4AF37; font-family: 'Reem Kufi', sans-serif;">99.9%</span>
+        <span class="text-sm" style="color: #A3956B;">نسبة الرضا</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== TESTIMONIALS ========== -->
+<section class="py-[140px] relative" style="background: #0A1628;">
+  <div class="max-w-[1400px] mx-auto px-8">
+    <div class="text-center mb-20">
+      <span class="inline-block text-xs font-semibold tracking-[3px] uppercase mb-4" style="color: #D4AF37;">آراء المستخدمين</span>
+      <h2 class="text-[36px] md:text-[48px] font-bold mb-5" style="font-family: 'Reem Kufi', sans-serif; color: #F5F0E0;">يثق بنا آلاف المستخدمين</h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- Testimonial 1 -->
+      <div class="p-8 rounded-[20px]" style="background: #111D32; border: 1px solid rgba(212, 175, 55, 0.1);">
+        <div class="flex items-center gap-1 mb-4">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="#D4AF37"><path d="M8 0l2.5 5L16 6l-4 4 1 5.5L8 12.5 3 15.5l1-5.5L0 6l5.5-1L8 0z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="#D4AF37"><path d="M8 0l2.5 5L16 6l-4 4 1 5.5L8 12.5 3 15.5l1-5.5L0 6l5.5-1L8 0z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="#D4AF37"><path d="M8 0l2.5 5L16 6l-4 4 1 5.5L8 12.5 3 15.5l1-5.5L0 6l5.5-1L8 0z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="#D4AF37"><path d="M8 0l2.5 5L16 6l-4 4 1 5.5L8 12.5 3 15.5l1-5.5L0 6l5.5-1L8 0z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="#D4AF37"><path d="M8 0l2.5 5L16 6l-4 4 1 5.5L8 12.5 3 15.5l1-5.5L0 6l5.5-1L8 0z"/></svg>
+        </div>
+        <p class="text-sm leading-[1.8] mb-6" style="color: #A3956B;">"قسطي غيّر طريقة إدارتي للعقود. كنت أستخدم Excel قبل ذلك وكان الأمر مرهقاً. الآن كل شيء منظم في مكان واحد."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold" style="background: linear-gradient(135deg, #D4AF37, #B8960E); color: #0A1628;">ع</div>
+          <div>
+            <p class="text-sm font-bold" style="color: #F5F0E0;">عبدالرحمن الفهد</p>
+            <p class="text-xs" style="color: #A3956B;">مؤسسة التمويل الذكي</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonial 2 -->
+      <div class="p-8 rounded-[20px]" style="background: #111D32; border: 1px solid rgba(212, 175, 55, 0.1);">
+        <div class="flex items-center gap-1 mb-4">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="#D4AF37"><path d="M8 0l2.5 5L16 6l-4 4 1 5.5L8 12.5 3 15.5l1-5.5L0 6l5.5-1L8 0z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="#D4AF37"><path d="M8 0l2.5 5L16 6l-4 4 1 5.5L8 12.5 3 15.5l1-5.5L0 6l5.5-1L8 0z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="#D4AF37"><path d="M8 0l2.5 5L16 6l-4 4 1 5.5L8 12.5 3 15.5l1-5.5L0 6l5.5-1L8 0z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="#D4AF37"><path d="M8 0l2.5 5L16 6l-4 4 1 5.5L8 12.5 3 15.5l1-5.5L0 6l5.5-1L8 0z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="#D4AF37"><path d="M8 0l2.5 5L16 6l-4 4 1 5.5L8 12.5 3 15.5l1-5.5L0 6l5.5-1L8 0z"/></svg>
+        </div>
+        <p class="text-sm leading-[1.8] mb-6" style="color: #A3956B;">"أفضل شيء هو تذكيرات واتساب التلقائية. عملائي يشكرونني على التذكير ونسبة التحصيل ارتفعت 40٪."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold" style="background: linear-gradient(135deg, #D4AF37, #B8960E); color: #0A1628;">ف</div>
+          <div>
+            <p class="text-sm font-bold" style="color: #F5F0E0;">فهد السالم</p>
+            <p class="text-xs" style="color: #A3956B;">شركة السالم للتمويل</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonial 3 -->
+      <div class="p-8 rounded-[20px]" style="background: #111D32; border: 1px solid rgba(212, 175, 55, 0.1);">
+        <div class="flex items-center gap-1 mb-4">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="#D4AF37"><path d="M8 0l2.5 5L16 6l-4 4 1 5.5L8 12.5 3 15.5l1-5.5L0 6l5.5-1L8 0z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="#D4AF37"><path d="M8 0l2.5 5L16 6l-4 4 1 5.5L8 12.5 3 15.5l1-5.5L0 6l5.5-1L8 0z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="#D4AF37"><path d="M8 0l2.5 5L16 6l-4 4 1 5.5L8 12.5 3 15.5l1-5.5L0 6l5.5-1L8 0z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="#D4AF37"><path d="M8 0l2.5 5L16 6l-4 4 1 5.5L8 12.5 3 15.5l1-5.5L0 6l5.5-1L8 0z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="#D4AF37"><path d="M8 0l2.5 5L16 6l-4 4 1 5.5L8 12.5 3 15.5l1-5.5L0 6l5.5-1L8 0z"/></svg>
+        </div>
+        <p class="text-sm leading-[1.8] mb-6" style="color: #A3956B;">"التقارير الشهرية المفصلة ساعدتني كثيراً في متابعة أداء عقودي. أنصح كل من يعمل في التمويل باستخدام قسطي."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold" style="background: linear-gradient(135deg, #D4AF37, #B8960E); color: #0A1628;">ن</div>
+          <div>
+            <p class="text-sm font-bold" style="color: #F5F0E0;">نورة القحطاني</p>
+            <p class="text-xs" style="color: #A3956B;">مكتب التمويل العقاري</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ========== PRICING ========== -->
+<section id="pricing" class="py-[140px] relative" style="background: #0F1E36;">
+  <div class="max-w-[1400px] mx-auto px-8">
+    <div class="text-center mb-20">
+      <span class="inline-block text-xs font-semibold tracking-[3px] uppercase mb-4" style="color: #D4AF37;">الباقات</span>
+      <h2 class="text-[36px] md:text-[48px] font-bold mb-5" style="font-family: 'Reem Kufi', sans-serif; color: #F5F0E0;">اختر الباقة المناسبة لك</h2>
+      <p class="text-lg max-w-[500px] mx-auto" style="color: #A3956B;">ابدأ مجاناً وارتقِ متى احتجت.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-[1000px] mx-auto">
+      <!-- Basic -->
+      <div class="pricing-card p-8 rounded-[20px] text-center">
+        <h3 class="text-lg font-bold mb-2" style="color: #F5F0E0;">الأساسية</h3>
+        <div class="mb-6">
+          <span class="text-[40px] font-bold" style="color: #D4AF37; font-family: 'Reem Kufi', sans-serif;">مجاناً</span>
+        </div>
+        <ul class="text-right space-y-3 mb-8">
+          <li class="flex items-center gap-2 text-sm" style="color: #A3956B;"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#059669" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>10 عقود</li>
+          <li class="flex items-center gap-2 text-sm" style="color: #A3956B;"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#059669" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>إدارة العملاء</li>
+          <li class="flex items-center gap-2 text-sm" style="color: #A3956B;"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#059669" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>تسجيل التحصيل</li>
+          <li class="flex items-center gap-2 text-sm" style="color: #A3956B;"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#059669" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>تقرير شهري PDF</li>
+        </ul>
+        <a href="#cta" class="btn-secondary w-full block text-center">ابدأ مجاناً</a>
+      </div>
+
+      <!-- Professional (Featured) -->
+      <div class="pricing-card pricing-featured p-8 rounded-[20px] text-center relative">
+        <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-xs font-bold" style="background: #D4AF37; color: #0A1628;">الأكثر شيوعاً</div>
+        <h3 class="text-lg font-bold mb-2" style="color: #F5F0E0;">الاحترافية</h3>
+        <div class="mb-6">
+          <span class="text-[40px] font-bold" style="color: #D4AF37; font-family: 'Reem Kufi', sans-serif;">99</span>
+          <span class="text-sm" style="color: #A3956B;"> ر.س/شهر</span>
+        </div>
+        <ul class="text-right space-y-3 mb-8">
+          <li class="flex items-center gap-2 text-sm" style="color: #A3956B;"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#059669" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>50 عقد</li>
+          <li class="flex items-center gap-2 text-sm" style="color: #A3956B;"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#059669" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>كل مميزات الأساسية</li>
+          <li class="flex items-center gap-2 text-sm" style="color: #A3956B;"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#059669" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>تذكيرات واتساب</li>
+          <li class="flex items-center gap-2 text-sm" style="color: #A3956B;"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#059669" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>تقارير مفصلة</li>
+          <li class="flex items-center gap-2 text-sm" style="color: #A3956B;"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#059669" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>دعم فني</li>
+        </ul>
+        <a href="#cta" class="btn-primary w-full block text-center">اشترك الآن</a>
+      </div>
+
+      <!-- Enterprise -->
+      <div class="pricing-card p-8 rounded-[20px] text-center">
+        <h3 class="text-lg font-bold mb-2" style="color: #F5F0E0;">المتقدمة</h3>
+        <div class="mb-6">
+          <span class="text-[40px] font-bold" style="color: #D4AF37; font-family: 'Reem Kufi', sans-serif;">199</span>
+          <span class="text-sm" style="color: #A3956B;"> ر.س/شهر</span>
+        </div>
+        <ul class="text-right space-y-3 mb-8">
+          <li class="flex items-center gap-2 text-sm" style="color: #A3956B;"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#059669" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>200 عقد</li>
+          <li class="flex items-center gap-2 text-sm" style="color: #A3956B;"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#059669" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>كل مميزات الاحترافية</li>
+          <li class="flex items-center gap-2 text-sm" style="color: #A3956B;"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#059669" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>رسائل واتساب مخصصة</li>
+          <li class="flex items-center gap-2 text-sm" style="color: #A3956B;"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#059669" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>دعم فني متميز</li>
+          <li class="flex items-center gap-2 text-sm" style="color: #A3956B;"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#059669" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>نسخ احتياطي يومي</li>
+        </ul>
+        <a href="#cta" class="btn-secondary w-full block text-center">تواصل معنا</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FAQ ========== -->
+<section id="faq" class="py-[140px] relative" style="background: #0A1628;">
+  <div class="max-w-[800px] mx-auto px-8">
+    <div class="text-center mb-20">
+      <span class="inline-block text-xs font-semibold tracking-[3px] uppercase mb-4" style="color: #D4AF37;">الأسئلة الشائعة</span>
+      <h2 class="text-[36px] md:text-[48px] font-bold mb-5" style="font-family: 'Reem Kufi', sans-serif; color: #F5F0E0;">كل ما تريد معرفته</h2>
+    </div>
+
+    <div class="space-y-4">
+      <!-- FAQ 1 -->
+      <div class="faq-item rounded-[16px] overflow-hidden" style="background: #111D32; border: 1px solid rgba(212, 175, 55, 0.1);">
+        <button class="faq-question w-full flex items-center justify-between p-5 text-right" onclick="toggleFaq(this)">
+          <span class="text-sm font-bold" style="color: #F5F0E0;">هل قسطي مجاني؟</span>
+          <svg class="faq-icon w-5 h-5 transition-transform duration-300" viewBox="0 0 20 20" fill="none" stroke="#D4AF37" stroke-width="2" stroke-linecap="round"><path d="M5 8l5 5 5-5"/></svg>
+        </button>
+        <div class="faq-answer hidden px-5 pb-5">
+          <p class="text-sm leading-[1.7]" style="color: #A3956B;">نعم! الباقة الأساسية مجانية تماماً وتتيح لك إدارة حتى 10 عقود. إذا احتجت لإدارة المزيد، يمكنك الارتقاء لباقة الاحترافية أو المتقدمة.</p>
+        </div>
+      </div>
+
+      <!-- FAQ 2 -->
+      <div class="faq-item rounded-[16px] overflow-hidden" style="background: #111D32; border: 1px solid rgba(212, 175, 55, 0.1);">
+        <button class="faq-question w-full flex items-center justify-between p-5 text-right" onclick="toggleFaq(this)">
+          <span class="text-sm font-bold" style="color: #F5F0E0;">هل بياناتي آمنة؟</span>
+          <svg class="faq-icon w-5 h-5 transition-transform duration-300" viewBox="0 0 20 20" fill="none" stroke="#D4AF37" stroke-width="2" stroke-linecap="round"><path d="M5 8l5 5 5-5"/></svg>
+        </button>
+        <div class="faq-answer hidden px-5 pb-5">
+          <p class="text-sm leading-[1.7]" style="color: #A3956B;">بالتأكيد. كل البيانات تُحفظ على خادم آمن مع تشفير SSL. كما نوفر خاصية النسخ الاحتياطي التلقائي في الباقات المدفوعة.</p>
+        </div>
+      </div>
+
+      <!-- FAQ 3 -->
+      <div class="faq-item rounded-[16px] overflow-hidden" style="background: #111D32; border: 1px solid rgba(212, 175, 55, 0.1);">
+        <button class="faq-question w-full flex items-center justify-between p-5 text-right" onclick="toggleFaq(this)">
+          <span class="text-sm font-bold" style="color: #F5F0E0;">كيف تعمل تذكيرات واتساب؟</span>
+          <svg class="faq-icon w-5 h-5 transition-transform duration-300" viewBox="0 0 20 20" fill="none" stroke="#D4AF37" stroke-width="2" stroke-linecap="round"><path d="M5 8l5 5 5-5"/></svg>
+        </button>
+        <div class="faq-answer hidden px-5 pb-5">
+          <p class="text-sm leading-[1.7]" style="color: #A3956B;">عند اقتراب موعد استحقاق قسط، يرسل النظام تذكيراً تلقائياً لعميلك عبر واتساب. يمكنك تخصيص نص الرسالة من الإعدادات.</p>
+        </div>
+      </div>
+
+      <!-- FAQ 4 -->
+      <div class="faq-item rounded-[16px] overflow-hidden" style="background: #111D32; border: 1px solid rgba(212, 175, 55, 0.1);">
+        <button class="faq-question w-full flex items-center justify-between p-5 text-right" onclick="toggleFaq(this)">
+          <span class="text-sm font-bold" style="color: #F5F0E0;">هل يمكنني تصدير البيانات؟</span>
+          <svg class="faq-icon w-5 h-5 transition-transform duration-300" viewBox="0 0 20 20" fill="none" stroke="#D4AF37" stroke-width="2" stroke-linecap="round"><path d="M5 8l5 5 5-5"/></svg>
+        </button>
+        <div class="faq-answer hidden px-5 pb-5">
+          <p class="text-sm leading-[1.7]" style="color: #A3956B;">نعم، يمكنك تصدير تقارير PDF مفصلة شهرياً. كما يمكنك تصدير بياناتك كاملةً بتنسيق JSON للنسخ الاحتياطي.</p>
+        </div>
+      </div>
+
+      <!-- FAQ 5 -->
+      <div class="faq-item rounded-[16px] overflow-hidden" style="background: #111D32; border: 1px solid rgba(212, 175, 55, 0.1);">
+        <button class="faq-question w-full flex items-center justify-between p-5 text-right" onclick="toggleFaq(this)">
+          <span class="text-sm font-bold" style="color: #F5F0E0;">هل يمكنني إلغاء اشتراكي في أي وقت؟</span>
+          <svg class="faq-icon w-5 h-5 transition-transform duration-300" viewBox="0 0 20 20" fill="none" stroke="#D4AF37" stroke-width="2" stroke-linecap="round"><path d="M5 8l5 5 5-5"/></svg>
+        </button>
+        <div class="faq-answer hidden px-5 pb-5">
+          <p class="text-sm leading-[1.7]" style="color: #A3956B;">نعم، يمكنك إلغاء اشتراكك في أي وقت بدون أي التزام. بياناتك تبقى محفوظة لمدة 30 يوماً بعد الإلغاء.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CTA ========== -->
+<section id="cta" class="py-[140px] relative overflow-hidden" style="background: #0F1E36;">
+  <div class="absolute top-1/2 left-1/2 w-[800px] h-[800px] rounded-full opacity-[0.05] -translate-x-1/2 -translate-y-1/2" style="background: radial-gradient(circle, #D4AF37 0%, transparent 70%); filter: blur(100px);"></div>
+
+  <div class="max-w-[700px] mx-auto px-8 text-center relative z-10">
+    <h2 class="text-[36px] md:text-[48px] font-bold mb-5 leading-[1.2]" style="font-family: 'Reem Kufi', sans-serif; color: #F5F0E0;">ابدأ في إدارة عقودك<br>بذكاء اليوم</h2>
+    <p class="text-lg leading-[1.8] mb-10" style="color: #A3956B;">سجل مجاناً واكتشف كيف يمكن لقسطي أن يوفر عليك ساعات من العمل يومياً.</p>
+    <div class="flex flex-wrap gap-4 justify-center">
+      <a href="#" class="btn-primary text-lg px-10 py-4">سجل مجاناً</a>
+      <a href="#demo" class="btn-secondary text-lg px-10 py-4">تعرف أكثر</a>
+    </div>
+    <p class="text-xs mt-6" style="color: #A3956B;">لا حاجة لبطاقة ائتمان • إلغاء في أي وقت</p>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="py-16" style="background: #0A1628; border-top: 1px solid rgba(212, 175, 55, 0.08);">
+  <div class="max-w-[1400px] mx-auto px-8">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+      <!-- Brand -->
+      <div class="md:col-span-1">
+        <span class="font-kufi text-2xl font-bold" style="color: #D4AF37;">قسطي</span>
+        <p class="text-sm mt-4 leading-[1.7]" style="color: #A3956B;">نظام إدارة العقود والأقساط المتكامل. صمم خصيصاً للمقرضين الأفراد وشركات التمويل الصغيرة في المملكة العربية السعودية.</p>
+      </div>
+
+      <!-- Links -->
+      <div>
+        <h4 class="text-sm font-bold mb-4" style="color: #D4AF37;">المميزات</h4>
+        <ul class="space-y-2">
+          <li><a href="#features" class="text-sm transition-colors duration-300 hover:text-gold" style="color: #A3956B;">لوحة التحكم</a></li>
+          <li><a href="#features" class="text-sm transition-colors duration-300 hover:text-gold" style="color: #A3956B;">إدارة العقود</a></li>
+          <li><a href="#features" class="text-sm transition-colors duration-300 hover:text-gold" style="color: #A3956B;">تذكيرات واتساب</a></li>
+          <li><a href="#features" class="text-sm transition-colors duration-300 hover:text-gold" style="color: #A3956B;">التقارير</a></li>
+        </ul>
+      </div>
+
+      <!-- Links -->
+      <div>
+        <h4 class="text-sm font-bold mb-4" style="color: #D4AF37;">الشركة</h4>
+        <ul class="space-y-2">
+          <li><a href="#" class="text-sm transition-colors duration-300 hover:text-gold" style="color: #A3956B;">عن قسطي</a></li>
+          <li><a href="#" class="text-sm transition-colors duration-300 hover:text-gold" style="color: #A3956B;">الأسعار</a></li>
+          <li><a href="#" class="text-sm transition-colors duration-300 hover:text-gold" style="color: #A3956B;">الشروط والأحكام</a></li>
+          <li><a href="#" class="text-sm transition-colors duration-300 hover:text-gold" style="color: #A3956B;">سياسة الخصوصية</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <h4 class="text-sm font-bold mb-4" style="color: #D4AF37;">تواصل معنا</h4>
+        <ul class="space-y-2">
+          <li class="flex items-center gap-2 text-sm" style="color: #A3956B;">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#A3956B" stroke-width="1.5"><path d="M2 4l6 4 6-4"/><rect x="2" y="3" width="12" height="10" rx="2"/></svg>
+            support@qasati.app
+          </li>
+          <li class="flex items-center gap-2 text-sm" style="color: #A3956B;">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#A3956B" stroke-width="1.5"><path d="M3 2l3 3-3 3"/><path d="M7 2h6"/><path d="M7 8h6"/></svg>
+            الرياض، المملكة العربية السعودية
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pt-8 flex flex-col md:flex-row items-center justify-between gap-4" style="border-top: 1px solid rgba(212, 175, 55, 0.08);">
+      <p class="text-xs" style="color: #A3956B;">© 2025 قسطي. جميع الحقوق محفوظة.</p>
+      <div class="flex items-center gap-6">
+        <a href="#" class="text-xs transition-colors duration-300 hover:text-gold" style="color: #A3956B;">تويتر</a>
+        <a href="#" class="text-xs transition-colors duration-300 hover:text-gold" style="color: #A3956B;">لينكدإن</a>
+        <a href="#" class="text-xs transition-colors duration-300 hover:text-gold" style="color: #A3956B;">واتساب</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ========== SCRIPTS ========== -->
+<script type="module" src="./src/script.js"></script>
+</body>
+</html>
