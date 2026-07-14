@@ -1,23 +1,16 @@
 # Dependencies
 node_modules
 npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 
 # Build output
 dist
 build
+*.tsbuildinfo
 
-# Docker files (avoid invalidating cache)
-Dockerfile
-Dockerfile.dev
-docker-compose*.yml
-.dockerignore
-
-# Git
-.git
-.gitignore
-.gitattributes
+# Environment files
+.env
+.env.local
+.env.*.local
 
 # IDE
 .vscode
@@ -38,28 +31,13 @@ logs
 coverage
 .nyc_output
 
-# Environment (we copy .env explicitly in Dockerfile)
-# .env
-# .env.local
-# .env.*.local
-
-# Database (local dev files)
+# Database
 *.db
 *.db-journal
 *.sqlite
 *.sqlite3
 
 # Misc
-README.md
-CHANGELOG.md
-.eslintrc*
-.prettierrc*
-.editorconfig
-docs/
-scripts/
-
-# Backend-building skill files (not needed in container)
-.agents/
-
-# GitHub
-.github/
+*.pid
+*.seed
+*.pid.lock
