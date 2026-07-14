@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-bg: #0A1628;
+    --color-gold: #D4AF37;
+    --color-gold-dark: #B8960E;
+    --color-accent: #2563EB;
+    --color-surface: #111D32;
+    --color-text: #F5F0E0;
+    --color-text-muted: #A3956B;
+    --color-success: #059669;
+    --color-danger: #DC2626;
+    --color-grid: #D4AF37;
+
+    --background: 216 48% 9%;
+    --foreground: 45 40% 92%;
+    --card: 216 48% 13%;
+    --card-foreground: 45 40% 92%;
+    --popover: 216 48% 13%;
+    --popover-foreground: 45 40% 92%;
+    --primary: 45 65% 52%;
+    --primary-foreground: 216 48% 9%;
+    --secondary: 216 48% 13%;
+    --secondary-foreground: 45 40% 92%;
+    --muted: 216 30% 20%;
+    --muted-foreground: 40 25% 53%;
+    --accent: 221 83% 53%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 45 65% 52%;
+    --input: 45 65% 52%;
+    --ring: 45 65% 52%;
+    --radius: 0.75rem;
+  }
+
+  body {
+    font-family: 'Cairo', sans-serif;
+    background: var(--color-bg);
+    color: var(--color-text);
+    overflow-x: hidden;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: pan-y;
+    -webkit-overflow-scrolling: touch;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  html {
+    background: var(--color-bg);
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  #root {
+    min-height: 100vh;
+    min-height: 100dvh;
+    background: var(--color-bg);
+  }
+
+  .font-kufi {
+    font-family: 'Reem Kufi', sans-serif;
+  }
+
+  .text-gold {
+    color: #D4AF37;
+  }
+
+  .bg-gold {
+    background: #D4AF37;
+  }
+
+  .border-gold {
+    border-color: #D4AF37;
+  }
+}
