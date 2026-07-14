@@ -2,7 +2,7 @@
 # Multi-stage build for production
 
 # Stage 1: Build
-FROM node:18-bullseye AS builder
+FROM node:20-bullseye AS builder
 
 WORKDIR /app
 
@@ -40,7 +40,7 @@ RUN ./node_modules/.bin/vite build && \
       --banner:js="import { createRequire } from 'module';const require = createRequire(import.meta.url);"
 
 # Stage 2: Production
-FROM node:18-bullseye-slim AS production
+FROM node:20-bullseye-slim AS production
 
 WORKDIR /app
 
