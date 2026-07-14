@@ -18,8 +18,10 @@ COPY vite.config.ts ./
 COPY ecosystem.config.js ./
 COPY server/ ./server/
 
-# Install with pnpm, rebuild better-sqlite3
-RUN pnpm install && npm rebuild better-sqlite3
+# Install with pnpm (allow build scripts), rebuild better-sqlite3
+RUN pnpm config set ignore-build-scripts false && \
+    pnpm install && \
+    pnpm rebuild better-sqlite3
 
 # Copy source code
 COPY src/ ./src/
@@ -53,7 +55,9 @@ COPY drizzle.config.ts ./
 COPY ecosystem.config.js ./
 
 # Install production deps + rebuild better-sqlite3
-RUN pnpm install --prod && npm rebuild better-sqlite3
+RUN pnpm config set ignore-build-scripts false && \
+    pnpm install --prod && \
+    pnpm rebuild better-sqlite3
 
 # Copy built files
 COPY --from=builder /app/dist ./dist
