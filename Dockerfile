@@ -1,20 +1,21 @@
 # Qasati - Dockerfile
 # Multi-stage build for production
 
-# Stage 1: Build (uses full node image with dev dependencies)
+# Stage 1: Build
 FROM node:18 AS builder
 
 WORKDIR /app
 
-# Copy all config files first
+# Copy config files
 COPY package*.json ./
 COPY tsconfig*.json ./
 COPY drizzle.config.ts ./
 COPY vite.config.ts ./
 COPY ecosystem.config.js ./
 
-# Install ALL dependencies (including devDependencies for build)
-RUN npm ci
+# Clean npm cache and install dependencies
+RUN npm cache clean --force && \
+    npm install --maxsockets=1
 
 # Copy source code
 COPY src/ ./src/
@@ -24,24 +25,21 @@ COPY db/ ./db/
 COPY contracts/ ./contracts/
 COPY public/ ./public/
 
-# Create empty .env for build (Vite may need it)
-RUN echo "VITE_APP_ID=dummy" > .env
-
-# Build frontend (vite) and backend (esbuild)
-RUN npx vite build && \
-    npx esbuild api/boot.ts \
+# Build with explicit node_modules path
+RUN ./node_modules/.bin/vite build && \
+    ./node_modules/.bin/esbuild api/boot.ts \
       --platform=node \
       --bundle \
       --format=esm \
       --outdir=dist \
       --banner:js="import { createRequire } from 'module';const require = createRequire(import.meta.url);"
 
-# Stage 2: Production (slim image with only production deps)
+# Stage 2: Production
 FROM node:18-slim AS production
 
 WORKDIR /app
 
-# Install PM2 globally
+# Install PM2
 RUN npm install -g pm2
 
 # Copy package files
@@ -50,10 +48,11 @@ COPY tsconfig*.json ./
 COPY drizzle.config.ts ./
 COPY ecosystem.config.js ./
 
-# Install only production dependencies
-RUN npm ci --only=production
+# Install production deps
+RUN npm cache clean --force && \
+    npm install --maxsockets=1 --only=production
 
-# Copy built files from builder
+# Copy built files
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/server ./server
 COPY --from=builder /app/api ./api
@@ -64,8 +63,6 @@ COPY --from=builder /app/public ./public
 # Create directories
 RUN mkdir -p /app/data /app/logs
 
-# Expose port
 EXPOSE 3000
 
-# Start with PM2
 CMD ["pm2-runtime", "start", "ecosystem.config.js"]
