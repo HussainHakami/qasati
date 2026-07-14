@@ -95,3 +95,5 @@ Built with Docker
 <!-- build v7 - npm+rebuild -->
 
 <!-- build v8 - alpine+force -->
+
+<!-- build v9 - global vite -->
