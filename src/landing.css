@@ -1,0 +1,276 @@
+/* ========== RESET & BASE ========== */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'Cairo', sans-serif;
+  background: #0A1628;
+  color: #F5F0E0;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* ========== TYPOGRAPHY ========== */
+.font-kufi {
+  font-family: 'Reem Kufi', sans-serif;
+}
+
+/* ========== NAVIGATION ========== */
+.nav-link {
+  font-family: 'Cairo', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #A3956B;
+  text-decoration: none;
+  padding: 0.5rem 0;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 0;
+  height: 2px;
+  background: #D4AF37;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: #D4AF37;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+/* ========== BUTTONS ========== */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #D4AF37;
+  color: #0A1628;
+  font-weight: 700;
+  border: 3px solid #B8960E;
+  border-radius: 9999px;
+  padding: 14px 32px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: 'Cairo', sans-serif;
+  font-size: 0.9375rem;
+}
+
+.btn-primary:hover {
+  background: #E5C84B;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(212, 175, 55, 0.25);
+}
+
+.btn-primary:active {
+  transform: translateY(0) scale(0.97);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: #D4AF37;
+  font-weight: 600;
+  border: 2px solid #D4AF37;
+  border-radius: 9999px;
+  padding: 14px 32px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: 'Cairo', sans-serif;
+  font-size: 0.9375rem;
+}
+
+.btn-secondary:hover {
+  background: rgba(212, 175, 55, 0.1);
+  border-color: #E5C84B;
+  color: #E5C84B;
+}
+
+/* ========== HERO GRID BACKGROUND ========== */
+.hero-grid {
+  background-image:
+    linear-gradient(rgba(212, 175, 55, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(212, 175, 55, 0.08) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* ========== FEATURE CARDS ========== */
+.feature-card {
+  background: #111D32;
+  border: 1px solid rgba(212, 175, 55, 0.1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.feature-card:hover {
+  border-color: rgba(212, 175, 55, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+.feature-card:hover::before {
+  opacity: 1;
+}
+
+/* ========== PRICING CARDS ========== */
+.pricing-card {
+  background: #111D32;
+  border: 1px solid rgba(212, 175, 55, 0.1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pricing-card:hover {
+  border-color: rgba(212, 175, 55, 0.25);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+}
+
+.pricing-featured {
+  border: 2px solid #D4AF37;
+  box-shadow: 0 8px 32px rgba(212, 175, 55, 0.1);
+  transform: scale(1.05);
+}
+
+.pricing-featured:hover {
+  box-shadow: 0 16px 48px rgba(212, 175, 55, 0.15);
+  transform: scale(1.05) translateY(-4px);
+}
+
+@media (max-width: 768px) {
+  .pricing-featured {
+    transform: scale(1);
+  }
+  .pricing-featured:hover {
+    transform: scale(1) translateY(-4px);
+  }
+}
+
+/* ========== FAQ ========== */
+.faq-item {
+  transition: border-color 0.3s ease;
+}
+
+.faq-item:hover {
+  border-color: rgba(212, 175, 55, 0.2);
+}
+
+.faq-question {
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.faq-question:hover {
+  background: rgba(212, 175, 55, 0.03);
+}
+
+.faq-answer {
+  animation: faqSlideDown 0.3s ease;
+}
+
+.faq-answer.hidden {
+  display: none;
+}
+
+.faq-icon {
+  flex-shrink: 0;
+}
+
+.faq-icon.rotated {
+  transform: rotate(180deg);
+}
+
+@keyframes faqSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========== HERO ANIMATIONS ========== */
+@keyframes heroFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-title {
+  animation: heroFadeIn 0.8s ease forwards;
+}
+
+.hero-image-container {
+  animation: heroFadeIn 1s ease 0.2s both;
+}
+
+/* ========== SCROLL REVEAL ========== */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+  .hero-grid {
+    background-size: 40px 40px;
+  }
+}
+
+/* ========== TEXT GOLD UTILITY ========== */
+.text-gold {
+  color: #D4AF37;
+}
+
+/* ========== SELECTION ========== */
+::selection {
+  background: rgba(212, 175, 55, 0.3);
+  color: #F5F0E0;
+}
