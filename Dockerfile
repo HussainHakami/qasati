@@ -17,11 +17,13 @@ COPY vite.config.ts ./
 COPY ecosystem.config.js ./
 COPY server/ ./server/
 
-# Install vite/esbuild globally + project deps without scripts
-RUN npm install -g vite esbuild && \
-    npm install --ignore-scripts
+# Step 1: Install deps without scripts (fast, stable)
+RUN npm install --ignore-scripts
 
-# Rebuild native bindings (better-sqlite3)
+# Step 2: Install packages that need postinstall scripts individually
+RUN npm install @hono/vite-dev-server esbuild
+
+# Step 3: Rebuild native bindings
 RUN npm rebuild better-sqlite3
 
 # Copy source code
@@ -31,9 +33,9 @@ COPY db/ ./db/
 COPY contracts/ ./contracts/
 COPY public/ ./public/
 
-# Build using global vite/esbuild
-RUN vite build && \
-    esbuild api/boot.ts \
+# Build using npx (vite/esbuild now in node_modules)
+RUN ./node_modules/.bin/vite build && \
+    ./node_modules/.bin/esbuild api/boot.ts \
       --platform=node \
       --bundle \
       --format=esm \
@@ -54,7 +56,7 @@ COPY tsconfig*.json ./
 COPY drizzle.config.ts ./
 COPY ecosystem.config.js ./
 
-# Install production deps
+# Install production deps (ignore-scripts for stability)
 RUN npm install --ignore-scripts --only=production && \
     npm rebuild better-sqlite3
 
