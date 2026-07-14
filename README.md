@@ -125,3 +125,5 @@ Built with Docker
 <!-- build v22 - bullseye -->
 
 <!-- build v23 - pnpm rebuild only -->
+
+<!-- build v24 - npm global -->
